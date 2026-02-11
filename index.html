@@ -9,6 +9,7 @@
             background-color: #f2f2f2;
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -16,11 +17,29 @@
         }
         h1 {
             color: #333;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        #ip {
+            color: #555;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <h1>hello welcoem to my website</h1>
-     <img src="hatsune-miku-anime.gif" alt="miku">
+    <h1>Hello! Welcome to my website</h1>
+    <img src="hatsune-miku-anime.gif" alt="miku">
+    <div id="ip">Your IP address is: Loading...</div>
+
+    <script>
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => document.getElementById('ip').textContent = "Your IP address is: " + data.ip);
+    </script>
 </body>
 </html>
