@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta property="og:title" content="Miku Miku Club">
-    <meta property="og:description" content="hello im juno">
-    <meta property="og:image" content="https://junoholic.github.io/mikumiku/mikustare.jpg">
-    <meta property="og:url" content="https://mikumiku.club/">
-    <meta property="og:type" content="website">
+<meta property="og:title" content="Miku Miku Club">
+<meta property="og:description" content="hello im juno">
+<meta property="og:image" content="https://junoholic.github.io/mikumiku/mikustare.jpg">
+<meta property="og:url" content="https://mikumiku.club/">
+<meta property="og:type" content="website">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://junoholic.github.io/mikumiku/favicon.ico" rel="icon" type="image/x-icon">
-    <title>miku</title>
-    <style>
-        body {
-            background-color: #f2f2f2;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        img {
-            max-width: 300px;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        #ip {
-            color: #555;
-            font-size: 1.2rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://junoholic.github.io/mikumiku/favicon.ico" rel="icon" type="image/x-icon">
+<title>miku</title>
+
+<style>
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#ip {
+    color: #555;
+    font-size: 1.2rem;
+}
+</style>
 </head>
-<body>
-    <h1>hello welcoem to my website</h1>
-    <img src="hatsune-miku-anime.gif" alt="miku">
-    <div id="ip">Your IP address is: Loading...</div>
 
-    <script>
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => document.getElementById('ip').textContent = "Your IP address is: " + data.ip);
-    </script>
+<body>
+
+<!-- simple top links -->
+<div style="text-align:center; margin:15px; font-family:sans-serif;">
+  <a href="/">Home</a> • 
+  <a href="/chat.html">Chat</a> • 
+  <a href="/about.html">About</a>
+</div>
+
+<h1>hello welcoem to my website</h1>
+
+<img src="hatsune-miku-anime.gif" alt="miku">
+
+<div id="ip">Your IP address is: Loading...</div>
+
+<script>
+fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('ip').textContent = "Your IP address is: " + data.ip;
+    });
+</script>
+
 </body>
 </html>
