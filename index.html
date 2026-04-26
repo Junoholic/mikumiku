@@ -6,13 +6,10 @@
 <meta property="og:image" content="https://junoholic.github.io/mikumiku/mikustare.jpg">
 <meta property="og:url" content="https://mikumiku.club/">
 <meta property="og:type" content="website">
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://junoholic.github.io/mikumiku/favicon.ico" rel="icon" type="image/x-icon">
-
 <title>miku</title>
-
 <style>
 body {
     background-color: #181818;
@@ -21,74 +18,92 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
-
-
 .nav {
     text-align: center;
     margin: 15px;
     font-family: monospace;
     color: #ffffff;
 }
-
 .nav a {
     color: #7df9ff;
     text-decoration: none;
 }
-
 .nav a:visited,
 .nav a:active,
 .nav a:hover {
     color: #7df9ff;
 }
-
 .nav span {
     color: #ffffff;
 }
-
 h1 {
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
-
-img {
-    max-width: 300px;
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+}
+.card img {
+    max-width: 250px;
     height: auto;
     border-radius: 10px;
-    margin-bottom: 20px;
 }
-
-#ip {
-    color: #bbbbbb;
-    font-size: 1.2rem;
+#info {
+    color: #7df9ff;
+    font-family: monospace;
+    white-space: pre;
+    font-size: 13px;
+    line-height: 1.6;
 }
 </style>
 </head>
-
 <body>
-
-<!-- top links -->
 <div class="nav">
-  <a href="/">home</a> <span>•</span> 
+  <a href="/">home</a> <span>•</span>
   <a href="/chat.html">chat</a>
 </div>
-
 <h1>hello welcoem to my website</h1>
-
-<img src="hatsune-miku-anime.gif" alt="miku">
-
-<div id="ip">Your IP address is: Loading...</div>
-
+<div class="card">
+  <img src="hatsune-miku-anime.gif" alt="miku">
+  <div id="info"></div>
+</div>
 <script>
-fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('ip').textContent =
-            "Your IP address is: " + data.ip;
-    });
-</script>
+const infoEl = document.getElementById("info");
 
+function render(ip="unknown") {
+  const ua = navigator.userAgent;
+  const os =
+      ua.includes("Win") ? "Windows" :
+      ua.includes("Mac") ? "macOS" :
+      ua.includes("Linux") ? "Linux" : "Unknown";
+  const browser =
+      ua.includes("Firefox") ? "Firefox" :
+      ua.includes("Chrome") ? "Chrome" :
+      ua.includes("Safari") ? "Safari" : "Unknown";
+
+  infoEl.textContent =
+`$ neofetch
+
+user:    juno
+os:      ${os}
+browser: ${browser}
+screen:  ${window.screen.width}x${window.screen.height}
+ip:      ${ip}
+status:  online`;
+}
+
+fetch("https://api.ipify.org?format=json")
+  .then(r => r.json())
+  .then(d => render(d.ip))
+  .catch(() => render("unknown"));
+</script>
 </body>
 </html>
