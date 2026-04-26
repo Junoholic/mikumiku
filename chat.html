@@ -122,7 +122,7 @@ window.send = async function () {
   await addDoc(collection(db, "messages"), {
     text: input.value,
     id: userId,
-    time: Date.now()
+    time: serverTimestamp()
   });
 
   input.value = "";
