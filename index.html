@@ -10,11 +10,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://junoholic.github.io/mikumiku/favicon.ico" rel="icon" type="image/x-icon">
+
 <title>miku</title>
 
 <style>
 body {
-    background-color: #f2f2f2;
+    background-color: #181818;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -24,8 +25,31 @@ body {
     margin: 0;
 }
 
+
+.nav {
+    text-align: center;
+    margin: 15px;
+    font-family: monospace;
+    color: #ffffff;
+}
+
+.nav a {
+    color: #7df9ff;
+    text-decoration: none;
+}
+
+.nav a:visited,
+.nav a:active,
+.nav a:hover {
+    color: #7df9ff;
+}
+
+.nav span {
+    color: #ffffff;
+}
+
 h1 {
-    color: #333;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
@@ -37,7 +61,7 @@ img {
 }
 
 #ip {
-    color: #555;
+    color: #bbbbbb;
     font-size: 1.2rem;
 }
 </style>
@@ -45,10 +69,10 @@ img {
 
 <body>
 
-<!-- simple top links -->
-<div style="text-align:center; margin:15px; font-family:sans-serif;">
-  <a href="/">home</a> • 
-  <a href="/chat.html">chat</a> 
+<!-- top links -->
+<div class="nav">
+  <a href="/">home</a> <span>•</span> 
+  <a href="/chat.html">chat</a>
 </div>
 
 <h1>hello welcoem to my website</h1>
@@ -61,7 +85,8 @@ img {
 fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
-        document.getElementById('ip').textContent = "Your IP address is: " + data.ip;
+        document.getElementById('ip').textContent =
+            "Your IP address is: " + data.ip;
     });
 </script>
 
