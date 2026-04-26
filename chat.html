@@ -287,9 +287,53 @@ async function init() {
 init();
 </script>
 
-</body>
-</html>
+ // msuik
+<div id="player">
+  <input id="songInput" placeholder="music url..." />
+  <button onclick="playSong()">play</button>
+  <audio id="music" controls loop></audio>
+</div>
 
+<style>
+#player {
+  position: fixed;
+  bottom: 70px;
+  right: 10px;
+  background: #0b0f14;
+  border: 1px solid #7df9ff;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  opacity: 0.95;
+  z-index: 999;
+}
+
+#songInput {
+  width: 140px;
+  background: #111;
+  border: 1px solid #7df9ff;
+  color: #7df9ff;
+  padding: 4px;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+#music {
+  width: 120px;
+  height: 24px;
+}
+</style>
+
+<script>
+function playSong() {
+  const url = document.getElementById("songInput").value.trim();
+  const audio = document.getElementById("music");
+  if (!url) return;
+  audio.src = url;
+  audio.play();
+}
 </script>
 
 </body>
