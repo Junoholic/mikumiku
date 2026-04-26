@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,6 +88,137 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 
+const ADJECTIVES = [
+"Agile","Alert","Ancient","Angry","Arcane","Arctic","Ashen","Atomic",
+"Azure","Barren","Basic","Battle","Beaming","Bitter","Black","Blazing",
+"Bleak","Blind","Blissful","Bold","Brave","Bright","Brisk","Broken",
+"Bronze","Burning","Busy","Calm","Careful","Casual","Cautious","Celestial",
+"Charming","Cheerful","Chilly","Civil","Classic","Clean","Clear","Clever",
+"Cloudy","Cold","Colorful","Comic","Cool","Cosmic","Crafty","Crazy",
+"Crisp","Cruel","Crystal","Curious","Cute","Damp","Dangerous","Dark",
+"Daring","Dazzling","Deadly","Deep","Defiant","Delicate","Dense","Desert",
+"Dire","Dirty","Distant","Divine","Dizzy","Double","Drab","Dragonlike",
+"Dry","Dual","Dusty","Dynamic","Eager","Early","Earthy","Easy",
+"Electric","Elegant","Elite","Empty","Endless","Energetic","Epic","Equal",
+"Eternal","Evil","Exact","Exotic","Expert","Faded","Fair","Faint",
+"Faithful","False","Fancy","Far","Fast","Fearless","Feral","Fierce",
+"Final","Fine","Firm","First","Flaky","Flashy","Flat","Flying",
+"Foggy","Foolish","Formal","Frozen","Full","Furious","Gentle","Giant",
+"Gifted","Glamorous","Glassy","Gleaming","Gloomy","Glorious","Golden","Grand",
+"Gray","Great","Green","Grim","Gritty","Groovy","Guarded","Happy",
+"Hard","Harsh","Hasty","Healthy","Heavy","Hidden","High","Hollow",
+"Honest","Hot","Huge","Hungry","Icy","Ideal","Idle","Ill",
+"Immense","Infinite","Inner","Iron","Jaded","Jagged","Jolly","Joyful",
+"Juicy","Just","Keen","Kind","Known","Lame","Large","Last",
+"Late","Lazy","Legal","Light","Likely","Liquid","Little","Lively",
+"Lonely","Long","Loose","Loud","Lucky","Lunar","Mad","Magic",
+"Major","Mature","Mean","Mellow","Metal","Mighty","Mild","Modern",
+"Moody","Mortal","Mystic","Narrow","Nasty","Natural","Near","Neat",
+"Nervous","New","Nice","Nimble","Noble","Noisy","Normal","Odd",
+"Old","Open","Orange","Outer","Pale","Past","Patient","Peaceful",
+"Perfect","Petty","Pink","Plain","Playful","Polite","Poor","Popular",
+"Powerful","Precise","Pretty","Prime","Proud","Pure","Quick","Quiet",
+"Rapid","Rare","Raw","Ready","Real","Rebel","Red","Rich",
+"Rigid","Rising","Robust","Rough","Royal","Rude","Rusty","Sacred",
+"Safe","Salty","Savage","Scary","Secret","Sharp","Shiny","Short",
+"Shy","Silent","Silver","Simple","Silly","Skilled","Slim","Slow",
+"Small","Smart","Smooth","Sneaky","Soft","Solid","Sour","Spicy",
+"Spooky","Square","Stable","Steady","Steel","Sticky","Stormy","Strange",
+"Strong","Stubborn","Sudden","Sunny","Swift","Tall","Tame","Tasty",
+"Thin","Thunder","Tiny","Tough","Tricky","True","Ugly","Ultra",
+"Unique","Urban","Vague","Valid","Vast","Velvet","Vivid","Warm",
+"Weak","Weird","Wet","Wild","Wise","Witty","Wooden","Young"
+];
+
+// 256 nouns
+const NOUNS = [
+"Ant","Anchor","Angel","Arrow","Axe","Badge","Bandit","Barrel",
+"Base","Bat","Beacon","Bear","Beast","Bell","Berry","Blade",
+"Blaze","Block","Boat","Bolt","Bone","Book","Boom","Boot",
+"Boulder","Bow","Branch","Brick","Bridge","Brush","Buck","Bullet",
+"Bunker","Burst","Bush","Button","Cactus","Cage","Camp","Cannon",
+"Captain","Car","Card","Castle","Cat","Cave","Chain","Chair",
+"Champion","Chest","Chief","Circle","Claw","Cliff","Clock","Cloud",
+"Cobra","Coin","Comet","Compass","Core","Coyote","Crate","Crow",
+"Crown","Crystal","Cube","Dagger","Dawn","Deer","Demon","Desk",
+"Diamond","Disk","Dog","Dragon","Drift","Drum","Duck","Dune",
+"Eagle","Echo","Edge","Engine","Falcon","Fan","Feather","Fence",
+"Field","Fire","Fish","Flag","Flame","Flash","Flower","Fog",
+"Forest","Forge","Fox","Frog","Frost","Galaxy","Gate","Gear",
+"Ghost","Giant","Gift","Glacier","Glove","Goat","Gold","Golem",
+"Grain","Grass","Griffin","Guard","Hammer","Hand","Harbor","Hawk",
+"Heart","Helix","Hill","Horn","Horse","Hunter","Ice","Island",
+"Ivy","Jewel","Judge","Jungle","Key","King","Knight","Lake",
+"Lamp","Leaf","Legend","Light","Lion","Lizard","Lock","Machine",
+"Map","Mask","Meteor","Mine","Mirror","Mist","Monkey","Moon",
+"Miku","Mouse","Nail","Needle","Nest","Night","Ninja","Node",
+"Nova","Oak","Ocean","Orb","Otter","Owl","Palace","Palm",
+"Panther","Path","Peak","Pearl","Pegasus","Pen","Phoenix","Pillar",
+"Pine","Pirate","Planet","Plate","Point","Pond","Portal","Prince",
+"Pulse","Pyramid","Quill","Rabbit","Raven","Rebel","Reef","Ring",
+"River","Robot","Rock","Rocket","Root","Rose","Rune","Saber",
+"Sail","Sand","Scorpion","Scroll","Seal","Shadow","Shark","Shield",
+"Ship","Shore","Signal","Silver","Skull","Sky","Snake","Snow",
+"Spear","Spider","Spirit","Spring","Spy","Star","Stone","Storm",
+"Sword","Table","Temple","Tiger","Tower","Track","Tree","Trident",
+"Troll","Tunnel","Turtle","Unicorn","Valley","Vapor","Vault","Vector",
+"Venom","Vessel","Vine","Void","Vortex","Wall","Wave","Wheel",
+"Whip","Whisper","Wind","Wing","Wolf","Wood","World","Worm",
+"Yeti","Zephyr","Zone","Anchor2","Blade2","Cloud2","Dragon2","Stone2"
+];
+
+function intToXboxName(n) {
+  // force to 32-bit unsigned
+  n = BigInt.asUintN(32, n);
+
+  let x = Number(n);
+
+  const number = x % 1000;
+  x = Math.floor(x / 1000);
+
+  const noun =
+    NOUNS[x % NOUNS.length];
+  x = Math.floor(x / NOUNS.length);
+
+  const adjective =
+    ADJECTIVES[x % ADJECTIVES.length];
+
+  return (
+    adjective +
+    noun +
+    number.toString().padStart(3, "0")
+  );
+}
+
+function strhash(str) {
+    let hash = 2166136261n; // FNV offset basis
+    for (let i = 0; i < str.length; i++) {
+        hash ^= BigInt(str.charCodeAt(i)); // XOR with the byte
+        hash *= 16777619n; // FNV prime
+    }
+    return hash;
+}
+
+async function genUsername() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+
+    let hash = strhash(data.ip);
+
+    console.log(data.ip);
+
+    const name = intToXboxName(hash);
+
+    console.log(name);
+
+    return name; 
+  } 
+  catch (err) {
+    console.log("ip failure");
+    return "ErrorMan69"; // or return a fallback name if you want
+  }
+}
 
 const firebaseConfig = {
   apiKey: "AIzaSyCxGa827PeavMRmIC0IQQVW_36nCQ5N8Xg",
@@ -103,51 +235,61 @@ const messages = query(
   orderBy("time", "asc")
 );
 
-// user id
-const userId = Math.random().toString(36).slice(2, 8);
+async function init() {
+  // user id
+  const userId = await genUsername();
+  console.log("Here")
+  console.log(userId);
 
-//hopw the fuck did i forget enter to send
-document.getElementById("msg").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    send();
-  }
-});
-
-  
-// message sending script
-window.send = async function () {
-  const input = document.getElementById("msg");
-
-  if (!input.value.trim()) return;
-
-  await addDoc(collection(db, "messages"), {
-    text: input.value,
-    id: userId,
-    time: serverTimestamp()
+  //hopw the fuck did i forget enter to send
+  document.getElementById("msg").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      send();
+    }
   });
 
-  input.value = "";
-};
+    
+  // message sending script
+  window.send = async function () {
+    const input = document.getElementById("msg");
+
+    if (!input.value.trim()) return;
+
+    await addDoc(collection(db, "messages"), {
+      text: input.value,
+      id: userId,
+      time: serverTimestamp()
+    });
+
+    input.value = "";
+  };
 
 
-onSnapshot(messages, (snap) => {
-  const chat = document.getElementById("chat");
-  chat.innerHTML = "";
+  onSnapshot(messages, (snap) => {
+    const chat = document.getElementById("chat");
+    chat.innerHTML = "";
 
-  snap.forEach(doc => {
-    const m = doc.data();
+    snap.forEach(doc => {
+      const m = doc.data();
 
-    if (!m.time) return;
+      if (!m.time) return;
 
-    const div = document.createElement("div");
-    div.className = "msg";
-    div.textContent = `[${m.id}] ${m.text}`;
+      const div = document.createElement("div");
+      div.className = "msg";
+      div.textContent = `[${m.id}] ${m.text}`;
 
-    chat.appendChild(div);
+      chat.appendChild(div);
+    });
+
+    chat.scrollTop = chat.scrollHeight;
   });
+}
+init();
+</script>
 
-  chat.scrollTop = chat.scrollHeight;
-});
+</body>
+</html>
+
 </script>
 
 </body>
