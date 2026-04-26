@@ -100,7 +100,7 @@ const db = getFirestore(app);
 // ordered mesages fix
 const messages = query(
   collection(db, "messages"),
-  orderBy("time")
+  orderBy("time", "asc")
 );
 
 // user id
@@ -136,6 +136,8 @@ onSnapshot(messages, (snap) => {
 
   snap.forEach(doc => {
     const m = doc.data();
+
+    if (!m.time) return;
 
     const div = document.createElement("div");
     div.className = "msg";
