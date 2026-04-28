@@ -325,14 +325,43 @@ init();
 </style>
 
 <script>
-function playSong() {
-  const url = document.getElementById("songInput").value.trim();
-  const audio = document.getElementById("music");
-  if (!url) return;
-  audio.src = url;
-  audio.play();
-}
-</script>
+    const ALLOWED_DOMAINS = [
+      'soundcloud.com',
+      'archive.org',
+      'cdn.jsdelivr.net',
+      'ia800.us.archive.org',
+    ];
+
+    function playSong() {
+      const url = document.getElementById("songInput").value.trim();
+      const audio = document.getElementById("music");
+      if (!url) return;
+
+      let parsed;
+      try {
+        parsed = new URL(url);
+      } catch {
+        alert("invalid url");
+        return;
+      }
+
+      if (parsed.protocol !== "https:") {
+        alert("only https urls allowed");
+        return;
+      }
+
+      const allowed = ALLOWED_DOMAINS.some(d =>
+        parsed.hostname === d || parsed.hostname.endsWith("." + d)
+      );
+      if (!allowed) {
+        alert("domain not allowed");
+        return;
+      }
+
+      audio.src = url;
+      audio.play();
+    }
+  </script>
 
 </body>
 </html>
