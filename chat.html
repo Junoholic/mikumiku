@@ -250,13 +250,12 @@ async function init() {
   // message sending script
   window.send = async function () {
     const input = document.getElementById("msg");
-    const timestamp = Date.now();
 
     if (!input.value.trim()) return;
 
     await addDoc(collection(db, "messages"), {
       text: input.value,
-      id: `${userId} ${timestamp}`,
+      username: userId, // Saved cleanly without the timestamp
       time: serverTimestamp()
     });
 
@@ -273,9 +272,16 @@ async function init() {
 
       if (!m.time) return;
 
+      const dateObject = m.time.toDate();
+      const timeString = dateObject.toLocaleTimeString([], { 
+        hour: 'numeric', 
+        minute: '2-digit' 
+      });
+      const senderName = m.username || m.id.split(" ")[0];
       const div = document.createElement("div");
       div.className = "msg";
-      div.textContent = `[${m.id}] ${m.text}`;
+      
+      div.textContent = `[${timeString}] ${senderName}: ${m.text}`;
 
       chat.appendChild(div);
     });
