@@ -250,12 +250,13 @@ async function init() {
   // message sending script
   window.send = async function () {
     const input = document.getElementById("msg");
+    const timestamp = Date.now();
 
     if (!input.value.trim()) return;
 
     await addDoc(collection(db, "messages"), {
       text: input.value,
-      id: userId,
+      id: `${userId} ${timestamp}`,
       time: serverTimestamp()
     });
 
