@@ -277,7 +277,7 @@ async function init() {
         hour: 'numeric', 
         minute: '2-digit' 
       });
-      const senderName = m.username || m.id.split(" ")[0];
+      const senderName = m.username || m.id?.split(" ")[0] || "unknown";
       const div = document.createElement("div");
       div.className = "msg";
       
