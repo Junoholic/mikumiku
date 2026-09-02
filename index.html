@@ -1,119 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta property="og:title" content="Miku Miku Club">
-<meta property="og:description" content="hello im juno">
-<meta property="og:image" content="https://junoholic.github.io/mikumiku/mikustare.jpg">
-<meta property="og:url" content="https://mikumiku.club/">
-<meta property="og:type" content="website">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://junoholic.github.io/mikumiku/favicon.ico" rel="icon" type="image/x-icon">
-<title>miku</title>
-<style>
-body {
-    background-color: #181818;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.nav {
-    text-align: center;
-    margin: 15px;
-    font-family: monospace;
-    color: #ffffff;
-}
-.nav a {
-    color: #7df9ff;
-    text-decoration: none;
-}
-.nav a:visited,
-.nav a:active,
-.nav a:hover {
-    color: #7df9ff;
-}
-.nav span {
-    color: #ffffff;
-}
-h1 {
-    color: #ffffff;
-    margin-bottom: 24px;
-}
-.card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 40px;
-}
-.card img {
-    max-width: 250px;
-    height: auto;
-    border-radius: 10px;
-}
-#info {
-    color: #7df9ff;
-    font-family: monospace;
-    white-space: pre;
-    font-size: 13px;
-    line-height: 1.6;
-}
-</style>
+  <meta property="og:title" content="Miku Miku Club">
+  <meta property="og:description" content="hello im juno">
+  <meta property="og:image" content="https://junoholic.github.io/mikumiku/images/mikustare.jpg">
+  <meta property="og:url" content="https://mikumiku.club/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="index/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="images/favicon.ico" rel="icon" type="image/x-icon">
+  <title>miku</title>
 </head>
 <body>
-<div class="nav">
-  <a href="/">home</a> <span>•</span>
-  <a href="/chat.html">chat</a> <span>•</span>
-  <a href="/board.html">comic</a> <span>•</span>
-    <a href="/art.html">art</a>
-    
-</div>
-<h1>hello welcoem to my website</h1>
-<div class="card">
-  <img src="hatsune-miku-anime.gif" alt="miku">
-  <div id="info"></div>
-</div>
-<script>
-const infoEl = document.getElementById("info");
+  <div id="container">
+    <div id="mikuclub" class="box">miku miku club</div>
+    <nav class="box">
+      <a href="/">home</a> •
+      <a href="/chat.html">chat</a> •
+      <a href="/art.html">art</a>
+    </nav>
+    <div id="grid">
+      <div class="box">
+        <h1>hello welcoem to my website</h1>
+        <img id="mikudance" src="images/hatsune-miku-anime.gif" alt="miku dancing tuff">
+      </div>
+      <div class="box">
+        <h2>badges</h2>
+        <div id="badges">
+          <a href="https://kernel.org/"><img class="badge" src="images/madeon_linux.gif" alt="badge one"></a>
+          <a href="https://mikumiku.club"><img class="badge" src="images/mikubadge.gif" alt="badge two"></a>
+          <a href="https://youra.monster"><img class="badge" src="images/monsterbadge.png" alt="badge three"></a>
+          <a href=""><img class="badge" src="images/e110.gif" alt="badge four"></a>
+          <a href=""><img class="badge" src="images/b60.png" alt="badge five"></a>
+          <a href=""><img class="badge" src="images/vriska.webp" alt="badge six"></a>
+          <a href=""><img class="badge" src="images/k17.png" alt="badge seven"></a>
+          <a href=""><img class="badge" src="images/e108.gif" alt="badge seven"></a>
+        </div>
+      </div>
+      <div class="box">
+        <div id="info"></div>
+        <script>
+            const infoEl = document.getElementById("info");
 
-function render(ip="unknown") {
-  const ua = navigator.userAgent;
-  const os =
-      ua.includes("Win") ? "Windows" :
-      ua.includes("Mac") ? "macOS" :
-      ua.includes("Linux") ? "Linux" : "Unknown";
-  const browser =
-      ua.includes("Firefox") ? "Firefox" :
-      ua.includes("Chrome") ? "Chrome" :
-      ua.includes("Safari") ? "Safari" : "Unknown";
+            function render(ip="unknown") {
+              const ua = navigator.userAgent;
+              const os =
+                  ua.includes("Win") ? "Windows" :
+                  ua.includes("Mac") ? "macOS" :
+                  ua.includes("Linux") ? "Linux" : "Unknown";
+              const browser =
+                  ua.includes("Firefox") ? "Firefox" :
+                  ua.includes("Chrome") ? "Chrome" :
+                  ua.includes("Safari") ? "Safari" : "Unknown";
 
-  infoEl.textContent =
-`$ neofetch
-
-user:    miku
-os:      ${os}
-browser: ${browser}
-screen:  ${window.screen.width}x${window.screen.height}
-ip:      ${ip}
+              infoEl.textContent =
+              `$ neofetch              
+user:    miku             
+os:      ${os}             
+browser: ${browser}             
+screen:  ${window.screen.width}x${window.screen.height}             
+ip:      ${ip}             
 status:  online`;
-}
+            }
 
-fetch("https://api.ipify.org?format=json")
-  .then(r => r.json())
-  .then(d => render(d.ip))
-  .catch(() => render("unknown"));
-</script>
-    
-    <div id="footnote">
-      <a href="https://kernel.org"><img src="static/madeon_linux.gif"></a>
-      <a href="https://mikumiku.club"><img src="static/mikubadge.gif"></a>
-      <a href="https://youra.monster"><img src="static/monsterbadge.png"></a>
+            fetch("https://api.ipify.org?format=json")
+              .then(r => r.json())
+              .then(d => render(d.ip))
+              .catch(() => render("unknown"));
+        </script>
+      </div>
+      <div class="box">
+        <div id="buttonpresser">
+          <button id="clickBtn">press me!</button>
+          <p>pressed: <span id="countDisplay">0</span> times</p>
+
+          <script>
+            var count = 0;
+            const button = document.getElementById('clickBtn');
+            const display = document.getElementById('countDisplay');
+
+            button.addEventListener('click', function() {
+              count++;
+              display.textContent = count;
+            });
+          </script>
+        </div>
+      </div>
     </div>
-
+  </div>
 </body>
 </html>
+
