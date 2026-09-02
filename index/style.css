@@ -1,1 +1,82 @@
+body {
+    margin: 0;
+    padding: 20px 0 60px;
+    font-family: Georgia, serif;
+    color: #fff;
+    background: #181818;
+}
+a:link,
+a:visited,
+a:active {
+    color: #7df9ff;
+    text-decoration: none;
+}
 
+a:hover {
+    color: #6fb8ff;
+}
+
+#container {
+width: 640px;
+max-width: 90%;
+margin: 0 auto;
+}
+.box {
+    border: 1px solid #444;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+}
+#mikuclub {
+text-align: center;
+font-size: 18px;
+}
+
+#buttonpresser {
+    font-size: 30px;
+    text-align: center;
+}
+
+#info {
+    color: #7df9ff;
+    font-family: monospace;
+    white-space: pre;
+    font-size: 13px;
+    line-height: 1.6;
+}
+#grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+}
+h1, h2 {
+    font-weight: normal;
+    margin: 0 0 16px;
+}
+h2 {
+    font-size: 15px;
+    color: #aaa;
+}
+#mikudance {
+width: 100%;
+aspect-ratio: 1;
+border: 1px solid #444;
+object-fit: cover;
+}
+#badges {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 6px;
+}
+.badge {
+    width: 100%;
+    aspect-ratio: 88 / 31;
+    background: #222;
+    border: 1px solid #555;
+    object-fit: fill;
+
+}
+@media screen and (max-width: 560px) {
+    #grid {
+    grid-template-columns: 1fr;
+    }
+}
