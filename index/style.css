@@ -44,17 +44,21 @@ font-size: 18px;
     line-height: 1.6;
 }
 #grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 14px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+}
+#grid > .box {
+    min-width: 0;
 }
 h1, h2 {
     font-weight: normal;
     margin: 0 0 16px;
 }
 h2 {
-    font-size: 15px;
-    color: #aaa;
+    font-family: Georgia, serif;
+    color: #fff;
+    background: #181818;
 }
 #mikudance {
 width: 100%;
@@ -75,8 +79,18 @@ gap: 6px;
     object-fit: fill;
 
 }
+
+#game {
+    grid-column: span 2;
+}
+
+
+
 @media screen and (max-width: 560px) {
     #grid {
     grid-template-columns: 1fr;
     }
+    #game {
+    grid-column: span 1;
+}
 }
